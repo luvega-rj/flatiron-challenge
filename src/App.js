@@ -8,16 +8,10 @@ function App() {
 
   useEffect(() => {
     fetch('http://localhost:3000/transactions')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(transactions => setTransactions(transactions))
-      .catch(error => console.error(error));
+ 
+      .then(response => response.json())
+      .then(data => setTransactions(data));
   }, []);
-  
 
   const handleSort = (type) => {
     const sortedTransactions = [...transactions].sort((a, b) => {
@@ -43,15 +37,12 @@ function App() {
 
   return (
     <div className="container">
-      {transactions && transactions.length > 0 ? (
-        <Table
-          transactions={transactions}
-          handleSort={handleSort}
-          handleDelete={handleDelete}
-        />
-      ) : (
-        <p>Loading transactions...</p>
-      )}
+       
+      <Table
+        transactions={transactions}
+        handleSort={handleSort}
+        handleDelete={handleDelete}
+      />
       <Form handleAddTransaction={handleAddTransaction} />
     </div>
   );
