@@ -7,7 +7,7 @@ function App() {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/transactions')
+    fetch('https://my-json-server.typicode.com/luvega-rj/flatiron-challenge/transactions')
  
       .then(response => response.json())
       .then(data => setTransactions(data));

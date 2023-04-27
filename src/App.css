@@ -87,7 +87,7 @@
   }
   
   .delete-btn {
-  background-color: red;
+  background-color: black;
   color: white;
   border: none;
   padding: 5px 10px;
@@ -101,7 +101,7 @@
   }
   
   .delete-btn:hover {
-  background-color: #c62828;
+  background-color:black;
   }
   
   .sort-btn {
