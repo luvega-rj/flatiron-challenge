@@ -7,10 +7,17 @@ function App() {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    fetch('https://my-json-server.typicode.com/barry-kn/bank-code--challange/transactions')
-      .then(response => response.json())
-      .then(transactions => setTransactions(transactions));
+    fetch('http://localhost:3000/transactions')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(transactions => setTransactions(transactions))
+      .catch(error => console.error(error));
   }, []);
+  
 
   const handleSort = (type) => {
     const sortedTransactions = [...transactions].sort((a, b) => {
@@ -36,12 +43,15 @@ function App() {
 
   return (
     <div className="container">
-       
-      <Table
-        transactions={transactions}
-        handleSort={handleSort}
-        handleDelete={handleDelete}
-      />
+      {transactions && transactions.length > 0 ? (
+        <Table
+          transactions={transactions}
+          handleSort={handleSort}
+          handleDelete={handleDelete}
+        />
+      ) : (
+        <p>Loading transactions...</p>
+      )}
       <Form handleAddTransaction={handleAddTransaction} />
     </div>
   );
